@@ -151,7 +151,7 @@ model.save(args["model"], save_format="h5")
 
 
 classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
-
+np.set_printoptions(precision=2)
 # Plot non-normalized confusion matrix
 titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
 for title, normalize in titles_options:
