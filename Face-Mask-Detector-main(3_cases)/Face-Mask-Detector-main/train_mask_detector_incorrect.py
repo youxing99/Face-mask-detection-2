@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import argparse
 import os
-from sklearn import svm
+from sklearn import svm, datasets
 from sklearn.metrics import plot_confusion_matrix
 
 # construct the argument parser and parse the arguments
@@ -150,11 +150,12 @@ model.save(args["model"], save_format="h5")
 
 
 
-#classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
+classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
+
 # Plot non-normalized confusion matrix
 titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
 for title, normalize in titles_options:
-	disp = plot_confusion_matrix(trainX,trainY,testX, testY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
+	disp = plot_confusion_matrix(classifier,testX, testY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
 
 	disp.ax_.set_title(title)
 
