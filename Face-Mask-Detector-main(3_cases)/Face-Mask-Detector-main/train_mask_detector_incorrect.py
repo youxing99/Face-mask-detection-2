@@ -23,6 +23,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import argparse
 import os
+from sklearn import svm
+from sklearn.metrics import plot_confusion_matrix
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -38,7 +40,7 @@ args = vars(ap.parse_args())
 # initialize the initial learning rate, number of epochs to train for,
 # and batch size
 INIT_LR = 1e-4
-EPOCHS = 20
+EPOCHS = 5
 BS = 32
 
 # grab the list of images in our dataset directory, then initialize
@@ -136,9 +138,26 @@ predIdxs = np.argmax(predIdxs, axis=1)
 print(classification_report(testY.argmax(axis=1), predIdxs,
 	target_names=lb.classes_))
 
+
 # serialize the model to disk
 print("[INFO] saving mask detector model...")
 model.save(args["model"], save_format="h5")
+
+
+
+
+
+
+classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
+# Plot non-normalized confusion matrix
+titles_options = [("Confusion matrix, without normalization", None),
+                  ("Normalized confusion matrix", 'true')]
+for title, normalize in titles_options:
+    disp = plot_confusion_matrix(classifier, trainX, trainY,
+                                 display_labels=labels,
+                                 cmap=plt.cm.Blues,
+                                 normalize=normalize)
+
 
 # plot the training loss and accuracy
 N = EPOCHS
