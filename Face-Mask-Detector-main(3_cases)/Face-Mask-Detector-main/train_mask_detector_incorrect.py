@@ -1,6 +1,6 @@
 # USAGE
 # python train_mask_detector_i.py --dataset dataset
-
+#APPPLLELEE
 # import the necessary packages
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import MobileNetV2
@@ -150,11 +150,11 @@ model.save(args["model"], save_format="h5")
 
 
 
-classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
+#classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
 # Plot non-normalized confusion matrix
 titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
 for title, normalize in titles_options:
-	disp = plot_confusion_matrix(classifier, trainX, trainY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
+	disp = plot_confusion_matrix(trainX, trainY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
 
 	disp.ax_.set_title(title)
 
