@@ -32,6 +32,8 @@ ap.add_argument("-d", "--dataset", required=True,
 	help="path to input dataset")
 ap.add_argument("-p", "--plot", type=str, default="plot.png",
 	help="path to output loss/accuracy plot")
+ap.add_argument("-p2", "--plot2", type=str, default="plot_matrix.png",
+	help="path to confusion matrix")
 ap.add_argument("-m", "--model", type=str,
 	default="mask_detector.model",
 	help="path to output face mask detector model")
@@ -150,14 +152,16 @@ model.save(args["model"], save_format="h5")
 
 classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
 # Plot non-normalized confusion matrix
-titles_options = [("Confusion matrix, without normalization", None),
-                  ("Normalized confusion matrix", 'true')]
+titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
 for title, normalize in titles_options:
-    disp = plot_confusion_matrix(classifier, trainX, trainY,
-                                 display_labels=labels,
-                                 cmap=plt.cm.Blues,
-                                 normalize=normalize)
+	disp = plot_confusion_matrix(classifier, trainX, trainY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
 
+	disp.ax_.set_title(title)
+
+	print(title)
+	print(disp.confusion_matrix)
+plt.show()
+plt.savefig(args["plot2"])
 
 # plot the training loss and accuracy
 N = EPOCHS
