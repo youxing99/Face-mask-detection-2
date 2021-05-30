@@ -154,7 +154,7 @@ model.save(args["model"], save_format="h5")
 # Plot non-normalized confusion matrix
 titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
 for title, normalize in titles_options:
-	disp = plot_confusion_matrix(trainX, trainY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
+	disp = plot_confusion_matrix(trainX,trainY,testX, testY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
 
 	disp.ax_.set_title(title)
 
