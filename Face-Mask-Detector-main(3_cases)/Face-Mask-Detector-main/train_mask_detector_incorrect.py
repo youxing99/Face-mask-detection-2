@@ -167,7 +167,7 @@ model.save(args["model"], save_format="h5")
 # plt.savefig(args["plot2"])
 
 
-mat = confusion_matrix(testY, predIdxs)
+mat = confusion_matrix(testY.argmax(axis=1), predIdxs)
 plot_confusion_matirx(conf_mat=mat, figsize=(8,8), class_names= lb.classes_)
 
 
