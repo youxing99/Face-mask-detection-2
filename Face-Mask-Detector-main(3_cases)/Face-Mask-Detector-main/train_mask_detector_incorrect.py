@@ -24,7 +24,9 @@ import numpy as np
 import argparse
 import os
 from sklearn import svm, datasets
-from sklearn.metrics import plot_confusion_matrix
+# from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix
+from mlxtend.plotting import plot_confusion_matirx
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -150,19 +152,30 @@ model.save(args["model"], save_format="h5")
 
 
 
-classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
-np.set_printoptions(precision=2)
-# Plot non-normalized confusion matrix
-titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
-for title, normalize in titles_options:
-	disp = plot_confusion_matrix(classifier,testX, testY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
+# classifier = svm.SVC(kernel='linear', C=0.01).fit(trainX, trainY)
+# np.set_printoptions(precision=2)
+# # Plot non-normalized confusion matrix
+# titles_options = [("Confusion matrix, without normalization", None), ("Normalized confusion matrix", 'true')]
+# for title, normalize in titles_options:
+# 	disp = plot_confusion_matrix(classifier,testX, testY, display_labels=labels, cmap=plt.cm.Blues, normalize=normalize)
+#
+# 	disp.ax_.set_title(title)
+#
+# 	print(title)
+# 	print(disp.confusion_matrix)
+# plt.show()
+# plt.savefig(args["plot2"])
 
-	disp.ax_.set_title(title)
+ypred = model.predict(testX, batch_size=BS)
 
-	print(title)
-	print(disp.confusion_matrix)
-plt.show()
-plt.savefig(args["plot2"])
+mat = confusion_matrix(testY, ypred)
+plot_confusion_matirx(conf_mat=mat, figsize=(8,8), class_names= labels)
+
+
+
+
+
+
 
 # plot the training loss and accuracy
 N = EPOCHS
