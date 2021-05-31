@@ -169,13 +169,13 @@ model.save(args["model"], save_format="h5")
 
 mat = confusion_matrix(testY.argmax(axis=1), predIdxs)
 plt.figure()
-plot_confusion_matrix(conf_mat=mat, figsize=(8,8), class_names=['incorrect_mask','with_mask','without_mask'])
+plot_confusion_matrix(conf_mat=mat, figsize=(8,8), class_names=lb.classes_)
 plt.savefig(args["plot2"])
 
 
 
 
-#class_names = ['a','b','c']
+#class_names=['incorrect_mask','with_mask','without_mask']
 
 
 
