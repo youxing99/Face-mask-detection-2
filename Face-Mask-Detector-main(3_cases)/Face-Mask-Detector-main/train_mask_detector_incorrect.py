@@ -44,7 +44,7 @@ args = vars(ap.parse_args())
 # initialize the initial learning rate, number of epochs to train for,
 # and batch size
 INIT_LR = 1e-4
-EPOCHS = 5
+EPOCHS = 2
 BS = 32
 
 # grab the list of images in our dataset directory, then initialize
@@ -166,10 +166,9 @@ model.save(args["model"], save_format="h5")
 # plt.show()
 # plt.savefig(args["plot2"])
 
-ypred = model.predict(testX, batch_size=BS)
 
-mat = confusion_matrix(testY, ypred)
-plot_confusion_matirx(conf_mat=mat, figsize=(8,8), class_names= labels)
+mat = confusion_matrix(testY, predIdxs)
+plot_confusion_matirx(conf_mat=mat, figsize=(8,8), class_names= lb.classes_)
 
 
 
