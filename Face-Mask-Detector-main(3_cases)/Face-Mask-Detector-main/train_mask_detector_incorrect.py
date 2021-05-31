@@ -26,7 +26,7 @@ import os
 from sklearn import svm, datasets
 #from sklearn.metrics import plot_confusion_matrix
 from sklearn.metrics import confusion_matrix
-from mlxtend.plotting import plot_confusion_matrixx
+from mlxtend.plotting import plot_confusion_matrix
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
