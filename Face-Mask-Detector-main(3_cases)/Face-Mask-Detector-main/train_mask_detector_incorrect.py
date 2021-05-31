@@ -169,7 +169,7 @@ model.save(args["model"], save_format="h5")
 
 mat = confusion_matrix(testY.argmax(axis=1), predIdxs)
 plt.figure()
-plot_confusion_matrix(conf_mat=mat, figsize=(8,8))
+plot_confusion_matrix(conf_mat=mat, figsize=(8,8), class_names=['incorrect_mask','with_mask','without_mask'])
 plt.savefig(args["plot2"])
 
 
