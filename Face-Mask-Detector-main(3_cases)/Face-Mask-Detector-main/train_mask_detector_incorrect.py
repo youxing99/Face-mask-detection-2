@@ -34,6 +34,10 @@ ap.add_argument("-d", "--dataset", required=True,
 	help="path to input dataset")
 ap.add_argument("-p", "--plot", type=str, default="plot.png",
 	help="path to output loss/accuracy plot")
+ap.add_argument("-p3", "--plot_loss", type=str, default="plot_loss.png",
+	help="path to output loss plot")
+ap.add_argument("-p4", "--plot_accuracy", type=str, default="plot_accuracy.png",
+	help="path to output accuracy plot")
 ap.add_argument("-p2", "--plot2", type=str, default="plot_matrix.png",
 	help="path to confusion matrix")
 ap.add_argument("-m", "--model", type=str,
@@ -193,3 +197,27 @@ plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
 plt.savefig(args["plot"])
+
+#plot training loss
+N = EPOCHS
+plt.style.use("ggplot")
+plt.figure()
+plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
+plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
+plt.title("Training Loss")
+plt.xlabel("Epoch #")
+plt.ylabel("Loss")
+plt.legend(loc="lower left")
+plt.savefig(args["plot_loss"])
+
+#plot accuracy
+N = EPOCHS
+plt.style.use("ggplot")
+plt.figure()
+plt.plot(np.arange(0, N), H.history["accuracy"], label="train_acc")
+plt.plot(np.arange(0, N), H.history["val_accuracy"], label="val_acc")
+plt.title("Accuracy")
+plt.xlabel("Epoch #")
+plt.ylabel("Accuracy")
+plt.legend(loc="lower left")
+plt.savefig(args["plot_accuracy"])
